@@ -34,7 +34,6 @@ import com.example.android.guesstheword.databinding.GameFragmentBinding
  */
 class GameFragment : Fragment() {
 
-
     private lateinit var binding: GameFragmentBinding
 
 
@@ -50,7 +49,6 @@ class GameFragment : Fragment() {
                 R.layout.game_fragment,
                 container,
                 false
-
         )
 
         Log.i("GameFragment", "Called ViewModelProviders.of")
@@ -62,29 +60,33 @@ class GameFragment : Fragment() {
         updateScoreText()
         updateWordText()
         return binding.root
-    }
 
+    }
 
     /** Methods for button click handlers **/
 
     private fun onSkip() {
+
         viewModel.onSkip()
         updateWordText()
         updateScoreText()
     }
+
     private fun onCorrect() {
         viewModel.onCorrect()
         updateScoreText()
         updateWordText()
     }
 
+    private fun onEndGame() {
+        gameFinished()
+    }
 
     /** Methods for updating the UI **/
 
     private fun updateWordText() {
         binding.wordText.text = viewModel.word
     }
-
     private fun updateScoreText() {
         binding.scoreText.text = viewModel.score.toString()
     }
@@ -93,9 +95,5 @@ class GameFragment : Fragment() {
         val action = GameFragmentDirections.actionGameToScore()
         action.score = viewModel.score
         NavHostFragment.findNavController(this).navigate(action)
-    }
-
-    private fun onEndGame() {
-        gameFinished()
     }
 }

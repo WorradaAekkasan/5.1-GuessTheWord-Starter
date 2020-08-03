@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
+    init {
+        Log.i("GameViewModel", "GameViewModel created!")
+    }
 
     // The current word
     var word = ""
@@ -13,6 +16,7 @@ class GameViewModel : ViewModel() {
 
     // The list of words - the front of the list is the next word to guess
     private lateinit var wordList: MutableList<String>
+
 
     /**
      * Resets the list of words and randomizes the order
@@ -43,15 +47,15 @@ class GameViewModel : ViewModel() {
         )
         wordList.shuffle()
     }
-
     init {
+        resetList()
+        nextWord()
         Log.i("GameViewModel", "GameViewModel created!")
     }
     override fun onCleared() {
         super.onCleared()
         Log.i("GameViewModel", "GameViewModel destroyed!")
     }
-
     fun onSkip() {
         score--
         nextWord()
@@ -66,6 +70,5 @@ class GameViewModel : ViewModel() {
             //Select and remove a word from the list
             word = wordList.removeAt(0)
         }
-
     }
 }
