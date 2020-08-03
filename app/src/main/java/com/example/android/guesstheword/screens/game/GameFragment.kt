@@ -24,11 +24,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
+import com.example.android.guesstheword.screens.GameViewModel
 
 /**
  * Fragment where the game is played
  */
 class GameFragment : Fragment() {
+
+    private lateinit var viewModel: GameViewModel
 
     // The current word
     private var word = ""
